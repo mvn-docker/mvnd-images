@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+set -x
+
+#JAVA_DISTRIBUTION="openjdk" 
+#JAVA_VERSION="8u151"
+echo "JAVA_DISTRIBUTION: ${JAVA_DISTRIBUTION}"
+echo "JAVA_VERSION: ${JAVA_VERSION}"
+
+MAJOR=${JAVA_VERSION//u*/}
+
+apt-get update -y
+
+JDK_PACKAGE="openjdk-${MAJOR}-jdk"
+
+JDK_MADISON=$(apt-cache madison ${JDK_PACKAGE} | grep -m1 ${JAVA_VERSION})
+
+#search for versioned package
+MATCHING_VERSION=$(echo "$JDK_MADISON" | awk '{print $3}')
+
+apt-get install ${JDK_PACKAGE}=${MATCHING_VERSION} -y
