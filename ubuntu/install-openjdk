@@ -25,4 +25,4 @@ apt-get install ${JDK_PACKAGE}=${MATCHING_VERSION}  -y
 apt-get autoremove -y 
 apt-get clean
 
-rm -rf /var/lib/{apt,dpkg,cache,log}/
+rm -rf /var/lib/{apt,cache,log}/
