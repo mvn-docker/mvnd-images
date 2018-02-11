@@ -20,3 +20,9 @@ JDK_MADISON=$(apt-cache madison ${JDK_PACKAGE} | grep -m1 ${JAVA_VERSION})
 MATCHING_VERSION=$(echo "$JDK_MADISON" | awk '{print $3}')
 
 apt-get install ${JDK_PACKAGE}=${MATCHING_VERSION}  -y
+
+# clean up steps
+apt-get autoremove -y 
+apt-get clean
+
+rm -rf /var/lib/{apt,dpkg,cache,log}/
