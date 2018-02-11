@@ -17,6 +17,7 @@ mv apache-maven-${MAVEN_VERSION} /opt
 ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /bin/mvn
 ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvnDebug /bin/mvnDebug
 
+# basic sanity check
 mvn -version
 
 # clean up steps

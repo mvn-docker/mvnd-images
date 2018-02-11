@@ -21,6 +21,9 @@ MATCHING_VERSION=$(echo "$JDK_MADISON" | awk '{print $3}')
 
 apt-get install ${JDK_PACKAGE}=${MATCHING_VERSION}  -y
 
+# basic sanity check
+java -version
+
 # clean up steps
 apt-get autoremove -y 
 apt-get clean
