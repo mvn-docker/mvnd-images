@@ -4,17 +4,17 @@ set -e
 set -x
 
 #JAVA_DISTRIBUTION="openjdk" 
-#JAVA_VERSION="8u151"
+#JAVA_VERSION="8"
+#JDK_BUILD=151
 echo "JAVA_DISTRIBUTION: ${JAVA_DISTRIBUTION}"
 echo "JAVA_VERSION: ${JAVA_VERSION}"
-
-MAJOR=${JAVA_VERSION:0:1}
+echo "JDK_BUILD: ${JDK_BUILD}"
 
 apt-get update -y
 
-JDK_PACKAGE="openjdk-${MAJOR}-jdk"
+JDK_PACKAGE="openjdk-${JAVA_VERSION}-jdk"
 
-JDK_MADISON=$(apt-cache madison ${JDK_PACKAGE} | grep -m1 ${JAVA_VERSION})
+JDK_MADISON=$(apt-cache madison ${JDK_PACKAGE} | grep -m1 -w "\s${JAVA_VERSION}.*${JDK_BUILD}")
 
 #search for versioned package
 MATCHING_VERSION=$(echo "$JDK_MADISON" | awk '{print $3}')
