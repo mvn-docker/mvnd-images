@@ -11,6 +11,7 @@ RUN set -x && \
 COPY {{OS}}/install-maven /{{OS}}/install-maven
 
 RUN set -x && \
+  MAVEN_VERSION={{MAVEN_VERSION}} \
   {{OS}}/install-maven
 
 WORKDIR /source
