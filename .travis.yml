@@ -15,7 +15,7 @@ before_script: false
 script:
   - export OS=${BASE_IMAGE//:*/}
   - envhandlebars < template.Dockerfile > Dockerfile
-  - export REPO=mvnd/"${BASE_IMAGE//[^[:alnum:]]/_}-${JAVA_DISTRIBUTION}:${JAVA_VERSION}b${JDK_BUILD}-${MAVEN_VERSION}"
+  - export REPO=mvnd/"${BASE_IMAGE//[^[:alnum:]]/_}-${JAVA_DISTRIBUTION}:${JAVA_VERSION}-${MAVEN_VERSION}"
   - docker build -f Dockerfile -t ${REPO} .
   - docker push ${REPO}
 

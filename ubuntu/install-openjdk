@@ -5,21 +5,12 @@ set -x
 
 #JAVA_DISTRIBUTION="openjdk" 
 #JAVA_VERSION="8"
-#JDK_BUILD=151
 echo "JAVA_DISTRIBUTION: ${JAVA_DISTRIBUTION}"
 echo "JAVA_VERSION: ${JAVA_VERSION}"
-echo "JDK_BUILD: ${JDK_BUILD}"
 
 apt-get update -y
 
-JDK_PACKAGE="openjdk-${JAVA_VERSION}-jdk"
-
-JDK_MADISON=$(apt-cache madison ${JDK_PACKAGE} | grep -m1 -w "\s${JAVA_VERSION}.*${JDK_BUILD}")
-
-#search for versioned package
-MATCHING_VERSION=$(echo "$JDK_MADISON" | awk '{print $3}')
-
-apt-get install ${JDK_PACKAGE}=${MATCHING_VERSION}  -y
+apt-get install "openjdk-${JAVA_VERSION}-jdk" -y
 
 # basic sanity check
 java -version
