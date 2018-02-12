@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+set -x
+
+#JAVA_DISTRIBUTION="openjdk" 
+#JAVA_VERSION="8"
+echo "JAVA_DISTRIBUTION: ${JAVA_DISTRIBUTION}"
+echo "JAVA_VERSION: ${JAVA_VERSION}"
+
+apk add --no-cache openjdk${JAVA_VERSION}
+
+# basic sanity check
+java -version
+
+# clean up steps
+rm -rf /var/lib/{apk,cache,log}/

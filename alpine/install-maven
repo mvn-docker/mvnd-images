@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+set -x
+
+apk add --no-cache wget tar
+
+#MAVEN_VERSION="3.5.2" 
+echo "MAVEN_VERSION: ${MAVEN_VERSION}"
+
+wget http://repo1.maven.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+tar xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz
+
+mkdir -p /opt
+mv apache-maven-${MAVEN_VERSION} /opt
+ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /bin/mvn
+ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvnDebug /bin/mvnDebug
+
+# basic sanity check
+mvn -version
+
+# clean up steps
+rm -rf apache-maven-${MAVEN_VERSION}-bin.tar.gz
+apk del wget tar
+
+rm -rf /var/lib/{apt,cache,log}/
