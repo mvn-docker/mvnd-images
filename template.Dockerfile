@@ -14,6 +14,13 @@ RUN set -x && \
   MAVEN_VERSION={{MAVEN_VERSION}} \
   {{OS}}/install-maven
 
+RUN mkdir -p /source
 WORKDIR /source
+
+# create and downgrade to the `maven` user
+ENV USER maven
+COPY {{OS}}/create-user /{{OS}}/create-user
+RUN /{{OS}}/create-user
+USER ${USER}
 
 CMD mvn
