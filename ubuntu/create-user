@@ -3,5 +3,5 @@
 set -e
 set -x
 
-adduser --disabled-password maven
+useradd -ms /bin/bash maven
 chown maven:maven /source
