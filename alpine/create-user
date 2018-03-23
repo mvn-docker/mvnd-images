@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-set -x
-
-adduser -D maven
-chown maven:maven /source
