@@ -3,10 +3,10 @@
 set -e
 set -x
 
-apk add --no-cache wget tar
-
 #MAVEN_VERSION="3.5.2" 
 echo "MAVEN_VERSION: ${MAVEN_VERSION}"
+
+apk add --no-cache wget tar
 
 wget http://repo1.maven.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.tar.gz
 tar xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz
@@ -23,4 +23,4 @@ mvn -version
 rm -rf apache-maven-${MAVEN_VERSION}-bin.tar.gz
 apk del wget tar
 
-rm -rf /var/lib/{apt,cache,log}/
+rm -rf /var/lib/{apk,cache,log}/

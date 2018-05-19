@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+set -x
+
+#JAVA_DISTRIBUTION="oraclejdk" 
+#JAVA_VERSION="8"
+echo "JAVA_DISTRIBUTION: ${JAVA_DISTRIBUTION}"
+echo "JAVA_VERSION: ${JAVA_VERSION}"
+
+apt-get update -y
+apt-get install -y --no-install-recommends wget curl ca-certificates
+wget 'https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh'
+chmod +x ./install-jdk.sh
+bash -x ./install-jdk.sh -F "${JAVA_VERSION}"
+ln -s /root/jdk-10.0.1/bin/java /bin/
+
+# clean up steps
+apt-get remove --purge -y wget curl ca-certificates
+apt-get autoremove -y 
+apt-get clean
+
+rm -rf /var/lib/{apt,cache,log}/
+rm ./install-jdk.sh
+
+# basic sanity check
+java -version
