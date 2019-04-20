@@ -13,14 +13,7 @@ script:
   - envhandlebars < template.Dockerfile > Dockerfile
   - docker build -f Dockerfile -t ${IMAGE} .
   # on master builds publish `LATEST` and `build-*` images
-  # travis flatten the if in a single line, so `;` is a must
-  - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then
-      TAG="build-${TRAVIS_BUILD_NUMBER}";
-      docker login -u $DOCKER_USER -p $DOCKER_PASS;
-      docker tag ${IMAGE} ${IMAGE}:${TAG};
-      docker push ${IMAGE};
-      docker push ${IMAGE}:${TAG};
-    fi
+  - ./travis/push_master.sh
 
 
 matrix:
